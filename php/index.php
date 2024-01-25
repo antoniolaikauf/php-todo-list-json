@@ -21,4 +21,6 @@ $lista = [
 ];
 // trasformata lalista in un json 
 $json_lista = json_encode($lista);
+
 echo $json_lista;
+// echo $json_lista;

@@ -6,7 +6,15 @@ export default {
     return {
       // arrai dove ci saranno tutti i compiti
       array_lista: [],
+      compitoDaAggiungere: "",
     };
+  },
+  methods: {
+    // fnzione per aggiungere la tasks
+    aggiungielemento() {
+      this.array_lista.push({ compito: this.compitoDaAggiungere, done: true });
+      this.compitoDaAggiungere = "";
+    },
   },
 
   mounted() {
@@ -14,7 +22,7 @@ export default {
     // chiamata ad api per il nostro server
     axios.get("http://localhost/php-todo-list-json/php/").then((risposta) => {
       t.array_lista = risposta.data;
-      console.log(risposta.data);
+      // console.log(risposta.data);
     });
   },
 };
@@ -28,12 +36,19 @@ export default {
         in rosso i compiti che non hai completato <br />in verde i compiti che
         hai completato
       </p>
-
+      <!-- aggiunta tasks -->
+      <div>
+        <input type="text" v-model="compitoDaAggiungere" />
+      </div>
+      <button style="width: 200px" @click="aggiungielemento">aggiungi</button>
       <ul>
         <!-- ciclo per comparsa componenti -->
         <li v-for="(compiti, i) in array_lista" :key="i">
-          <div :class="compiti.done ? 'done ' : 'no_done '" class="my-3">
+          <div v-if="compiti.done">
             {{ compiti.compito }}
+          </div>
+          <div v-else>
+            <del>{{ compiti.compito }}</del>
           </div>
         </li>
       </ul>
@@ -41,12 +56,4 @@ export default {
   </div>
 </template>
 
-<style scoped lang="scss">
-.done {
-  background-color: green;
-}
-
-.no_done {
-  background-color: red;
-}
-</style>
+<style scoped lang="scss"></style>
