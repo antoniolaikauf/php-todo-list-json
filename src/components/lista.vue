@@ -20,10 +20,15 @@ export default {
   mounted() {
     const t = this;
     // chiamata ad api per il nostro server
-    axios.get("http://localhost/php-todo-list-json/php/").then((risposta) => {
-      t.array_lista = risposta.data;
-      // console.log(risposta.data);
-    });
+    axios
+      .get("http://localhost/php-todo-list-json/php/")
+      .then((risposta) => {
+        t.array_lista = risposta.data;
+        // console.log(risposta.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   },
 };
 </script>
