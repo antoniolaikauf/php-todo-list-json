@@ -1,8 +1,10 @@
 <script>
+// impost del file lista
 import lista from "./components/lista.vue";
 
 export default {
   components: {
+    // componente lista
     lista,
   },
 };

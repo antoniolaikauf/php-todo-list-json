@@ -4,12 +4,14 @@ export default {
   new: "lista",
   data() {
     return {
+      // arrai dove ci saranno tutti i compiti
       array_lista: [],
     };
   },
 
   mounted() {
     const t = this;
+    // chiamata ad api per il nostro server
     axios.get("http://localhost/php-todo-list-json/php/").then((risposta) => {
       t.array_lista = risposta.data;
       console.log(risposta.data);
@@ -28,6 +30,7 @@ export default {
       </p>
 
       <ul>
+        <!-- ciclo per comparsa componenti -->
         <li v-for="(compiti, i) in array_lista" :key="i">
           <div :class="compiti.done ? 'done ' : 'no_done '" class="my-3">
             {{ compiti.compito }}
