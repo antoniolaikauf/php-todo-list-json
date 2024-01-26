@@ -1,5 +1,4 @@
 <script>
-import axios from "axios";
 export default {
   new: "lista",
   props: {
@@ -9,14 +8,19 @@ export default {
 </script>
 
 <template>
-  <div class="container">
-    <div class="row">
-      <div v-if="list.done">{{ list.compito }}</div>
+  <div v-if="list.done">{{ list.compito }}</div>
 
-      <div v-else>
-        <del>{{ list.compito }}</del>
-      </div>
-    </div>
+  <div v-else>
+    <del>{{ list.compito }}</del>
+  </div>
+  <div class="btn-group" role="group" aria-label="Basic outlined example">
+    <button
+      type="button"
+      class="btn btn-outline-primary"
+      @click="$emit('deletetasks')"
+    >
+      delete
+    </button>
   </div>
 </template>
 

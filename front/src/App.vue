@@ -15,6 +15,21 @@ export default {
     };
   },
   methods: {
+    deletecompito(index) {
+      const params = {
+        params: {
+          index: index,
+        },
+      };
+      axios
+        .get("http://localhost/php-todo-list-json/php/deletetasks.php", params)
+        .then((risposta) => {
+          this.array_lista = risposta.data;
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    },
     // fnzione per aggiungere la tasks
     aggiungielemento() {
       const params = {
@@ -27,27 +42,11 @@ export default {
         .then((risposta) => {
           this.array_lista = risposta.data;
           this.compitoDaAggiungere = "";
+        })
+        .catch((error) => {
+          console.error(error);
         });
     },
-    // aggiungielemento() {
-    //   const t = this;
-    //   const params = {
-    //     compito: this.compitoDaAggiungere,
-    //   };
-    //   const config = {
-    //     headers: {
-    //       "Content-Type": "multipart/form-data",
-    //     },
-    //   };
-
-    //   axios
-    //     .post("http://localhost/back-end/pushPost.php", params, config)
-    //     .then((res) => {
-    //       t.array_lista = res.data;
-    //       t.compitoDaAggiungere = "";
-    //     })
-    //     .catch((err) => console.log(err));
-    // },
   },
   mounted() {
     // chiamata ad api per il nostro server
@@ -74,7 +73,7 @@ export default {
       <button style="width: 200px" @click="aggiungielemento">aggiungi</button>
       <ul>
         <li v-for="(lista, i) in array_lista">
-          <lista :list="lista" />
+          <lista :list="lista" @deletetasks="deletecompito(i)" />
         </li>
       </ul>
     </div>
