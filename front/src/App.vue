@@ -10,11 +10,14 @@ export default {
   },
   data() {
     return {
+      // array vuoto dove ci saranno i compiti
       array_lista: [],
+      // varriabile dove ci sara il nuovo compito
       compitoDaAggiungere: "",
     };
   },
   methods: {
+    // funzione per eliminare il compito
     deletecompito(index) {
       const params = {
         params: {
@@ -47,6 +50,7 @@ export default {
           console.error(error);
         });
     },
+    // funzione per cambiare lo stato del compito
     changeStatus(index) {
       const params = {
         params: {
@@ -61,7 +65,6 @@ export default {
         .catch((error) => {
           console.error(error);
         });
-      console.log(index);
     },
   },
   mounted() {
@@ -91,7 +94,9 @@ export default {
       <div>
         <input type="text" v-model="compitoDaAggiungere" />
       </div>
-      <button style="width: 200px" @click="aggiungielemento">aggiungi</button>
+      <button style="width: 200px" @click="aggiungielemento">
+        aggiungi task
+      </button>
       <ul>
         <li v-for="(lista, i) in array_lista">
           <lista

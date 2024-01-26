@@ -1,4 +1,5 @@
 <?php
+// leggerlo in json
 header(('content-type: application/json'));
 // policy per server comunicazioni
 header("Access-Control-Allow-Headers: X-Requested-With");
@@ -16,5 +17,5 @@ array_splice($compito, $deleteindex, '1');
 // ritrasformare il file in un file json e aggiorna automaticamente il file con dentro il componente nuovo 
 $fileJson = json_encode($compito);
 file_put_contents('lista.json', $fileJson);
-
+// senza l'echo il file sarebbe vuoto
 echo $fileJson;
