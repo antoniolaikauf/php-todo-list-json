@@ -17,9 +17,37 @@ export default {
   methods: {
     // fnzione per aggiungere la tasks
     aggiungielemento() {
-      this.array_lista.push({ compito: this.compitoDaAggiungere, done: true });
-      this.compitoDaAggiungere = "";
+      const params = {
+        params: {
+          compito: this.compitoDaAggiungere,
+        },
+      };
+      axios
+        .get("http://localhost/php-todo-list-json/php/getcompito.php", params)
+        .then((risposta) => {
+          this.array_lista = risposta.data;
+          this.compitoDaAggiungere = "";
+        });
     },
+    // aggiungielemento() {
+    //   const t = this;
+    //   const params = {
+    //     compito: this.compitoDaAggiungere,
+    //   };
+    //   const config = {
+    //     headers: {
+    //       "Content-Type": "multipart/form-data",
+    //     },
+    //   };
+
+    //   axios
+    //     .post("http://localhost/back-end/pushPost.php", params, config)
+    //     .then((res) => {
+    //       t.array_lista = res.data;
+    //       t.compitoDaAggiungere = "";
+    //     })
+    //     .catch((err) => console.log(err));
+    // },
   },
   mounted() {
     // chiamata ad api per il nostro server
