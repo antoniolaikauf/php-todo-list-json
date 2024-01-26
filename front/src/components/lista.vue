@@ -21,6 +21,14 @@ export default {
     >
       delete
     </button>
+    <button
+      v-if="list.done"
+      type="button"
+      class="btn btn-outline-primary"
+      @click="$emit('completata')"
+    >
+      completata
+    </button>
   </div>
 </template>
 
