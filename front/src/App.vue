@@ -91,12 +91,12 @@ export default {
       <h1 v-else class="text-center">
         compiti della lista {{ array_lista.length }}
       </h1>
-      <div>
-        <input type="text" v-model="compitoDaAggiungere" />
-      </div>
-      <button style="width: 200px" @click="aggiungielemento">
-        aggiungi task
-      </button>
+      <form @submit.prevent="aggiungielemento">
+        <div>
+          <input type="text" v-model="compitoDaAggiungere" />
+        </div>
+        <input type="submit" value="SEND" />
+      </form>
       <ul>
         <li v-for="(lista, i) in array_lista">
           <lista
